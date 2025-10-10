@@ -1,26 +1,36 @@
 This front-end application is a statically served HTML document that leverages JavaScript and a CSV parsing library to consume data from an external cloud-based spreadsheet and render it into structured tabular formats within the DOM.
 
-Architectural Overview:
-Initialization & Event Binding
-Upon window load, a function is automatically invoked to trigger the data retrieval pipeline. A user-interactive button is also configured to allow manual refresh of the data rendering process without reloading the page.
+Architectural Overview:  
+Upon window load, an initialization function is automatically executed to trigger the data retrieval and rendering process.  
+A user-interactive **Refresh** button allows manual reloading of data without refreshing the page, while a **Redirect** button opens the live Google Sheets document in a new browser tab.
 
-External Data Source Integration
-The application constructs a direct link to a cloud spreadsheet export endpoint, requesting data in CSV format via HTTP. The external document must be publicly accessible to avoid CORS violations.
+External Data Source Integration:  
+The application connects directly to a publicly accessible Google Sheets document through a CSV export endpoint.  
+This ensures up-to-date data retrieval from the cloud without any server-side components.
 
-Data Acquisition Layer
-The fetch() API is employed to retrieve the remote CSV file. If successful, the raw textual content is handed off to the parsing layer; otherwise, a fallback alert and error logging mechanism is triggered.
+Data Acquisition Layer:  
+The `fetch()` API is used to request data in CSV format.  
+If successful, the CSV content is passed to the parsing layer; if not, a graceful fallback hides the loader, alerts the user, and logs an error message to the console.
 
-Client-Side CSV Parsing
-The application utilizes a client-side CSV parser to transform the raw delimited string into a structured two-dimensional array. This abstraction decouples the data source format from the rendering logic.
+Client-Side CSV Parsing:  
+The application employs **PapaParse**, a lightweight client-side CSV parsing library, to transform raw CSV text into a structured array for seamless integration with the DOM rendering logic.
 
-DOM Rendering Logic
-Using JavaScript, the application programmatically constructs table headers and rows by iterating through the parsed dataset. Any previously rendered content is cleared prior to injection to ensure stateless rendering.
+DOM Rendering Logic:  
+All content generation is handled dynamically using vanilla JavaScript.  
+Before new data is displayed, previously rendered content is cleared to maintain a clean and consistent view.  
+No external frameworks are required for DOM manipulation.
 
-Dynamic UI Composition
-Two distinct data tables are rendered into the document object model (DOM), each targeting different segments of the dataset. All DOM manipulation is performed without reliance on external frameworks.
+Dynamic UI Composition:  
+Two main data tables are rendered dynamically to represent portfolio details and summary information.  
+This separation maintains clarity and organization of the displayed data.
 
-Responsive Styling & UX Enhancements
-The layout employs CSS for visual hierarchy, responsive scaling, and user experience optimization. Sticky headers and columns are implemented for better navigation in horizontally scrollable views.
+Responsive Styling & UX Enhancements:  
+The interface uses a clean, responsive layout defined in an external CSS file.  
+A full-screen loader animation provides visual feedback during data fetching.  
+Accessibility considerations are included through ARIA attributes and intuitive button placement.
 
-Error Handling & Fallbacks
-In case of network failure or access restriction, the application displays a user-facing alert and logs the error to the browser console to aid debugging.
+Error Handling & Fallbacks:  
+If a network issue or data access error occurs, the application hides the loader, displays a user-facing alert, and logs technical details to assist with debugging.
+
+Caching Considerations:  
+To prevent outdated files from being loaded, developers can append version query parameters to CSS or JS file URLs (e.g., `script.js?v=2`) to bypass browser caching and ensure the latest assets are fetched.
