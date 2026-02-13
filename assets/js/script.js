@@ -1,30 +1,29 @@
-// ----------------------------------------
-// KONFIGURASI: ID dan GID dari Google Sheet
-// ----------------------------------------
+(function() {
+  const allowedOrigin = 'https://itsanewdawnnn.github.io';
+  const allowedPath = '/smart-money-tracker/';
+  const currentOrigin = window.location.origin;
+  const currentPath = window.location.pathname;
+
+  if (currentOrigin !== allowedOrigin || !currentPath.startsWith(allowedPath)) {
+    document.documentElement.innerHTML = '';
+    document.title = '';
+  }
+})();
+
 const sheetID = '1JZ4OV-qpB_QhyXJMeNR9YRAL5GDuKYdAm62ch7ShteM';
 const gid = '371636866';
 const url = `https://docs.google.com/spreadsheets/d/${sheetID}/export?format=csv&gid=${gid}`;
 
-// ----------------------------------------
-// FUNGSI: Menampilkan animasi loader
-// ----------------------------------------
 function showLoader() {
   document.getElementById('loader').classList.remove('hidden');
 }
 
-// ----------------------------------------
-// FUNGSI: Menyembunyikan animasi loader
-// ----------------------------------------
 function hideLoader() {
   document.getElementById('loader').classList.add('hidden');
 }
 
-// ----------------------------------------
-// FUNGSI UTAMA: Ambil data dan tampilkan di tabel
-// ----------------------------------------
 function loadData() {
   showLoader();
-
   const portfolioThead = document.querySelector('#tabel-portfolio thead');
   const portfolioTbody = document.querySelector('#tabel-portfolio tbody');
   const rekapitulasiThead = document.querySelector('#tabel-rekapitulasi thead');
@@ -42,7 +41,6 @@ function loadData() {
         complete: function(results) {
           const data = results.data;
 
-          // HEADER: Portofolio (kolom 0–7)
           const headRow = document.createElement('tr');
           for (let j = 0; j <= 7; j++) {
             const th = document.createElement('th');
@@ -51,12 +49,10 @@ function loadData() {
           }
           portfolioThead.appendChild(headRow);
 
-          // DATA: Portofolio
           for (let i = 1; i < data.length; i++) {
             const row = data[i];
             const isEmpty = row.slice(0, 8).every(cell => !cell || cell.trim() === '');
             if (isEmpty) continue;
-
             const tr = document.createElement('tr');
             for (let j = 0; j <= 7; j++) {
               const td = document.createElement('td');
@@ -66,7 +62,6 @@ function loadData() {
             portfolioTbody.appendChild(tr);
           }
 
-          // HEADER: Rekapitulasi (kolom 9–10)
           const rekapHeader = document.createElement('tr');
           for (let j = 9; j <= 10; j++) {
             const th = document.createElement('th');
@@ -75,7 +70,6 @@ function loadData() {
           }
           rekapitulasiThead.appendChild(rekapHeader);
 
-          // DATA: Rekapitulasi (baris 1–8)
           for (let i = 1; i <= 8; i++) {
             const tr = document.createElement('tr');
             for (let j = 9; j <= 10; j++) {
@@ -97,12 +91,8 @@ function loadData() {
     });
 }
 
-// ----------------------------------------
-// INISIALISASI
-// ----------------------------------------
 window.onload = loadData;
 
-// Pastikan fungsi redirect bisa dipanggil dari HTML
 window.redirectToSheet = function() {
   window.open(
     'https://docs.google.com/spreadsheets/d/e/2PACX-1vRWphCAKFdMWQcSqCxndaeQoZXEa76a_Qz2Eg5rGQaNqlJ_r_UGLCDBiAdqAgbwzwkKkWvLn_QvNDc4/pubhtml',
