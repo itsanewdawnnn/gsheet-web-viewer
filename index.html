@@ -5,41 +5,62 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Portofolio Keluarga Cemara</title>
 
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+
   <link rel="stylesheet" href="assets/css/style.css">
+
   <script src="https://cdn.jsdelivr.net/npm/papaparse@5.4.1/papaparse.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  
   <script src="assets/js/script.js" defer></script>
 
 </head>
 
 <body>
+  
   <div id="loader" role="status" aria-label="Memuat data...">
     <div class="spinner" aria-hidden="true"></div>
+    <p>Memuat Data...</p>
   </div>
 
-  <section class="judul-bagian" aria-label="Bagian Portofolio">
-    <h2>♥ Portofolio</h2>
-    <div>
-      <button onclick="loadData()" aria-label="Muat ulang data portofolio">Refresh</button>
+  <div id="main-content" style="display: none;">
+    
+    <div class="glass-container">
+      <section class="judul-bagian" aria-label="Bagian Portofolio">
+        <h2>♥ Portofolio</h2>
+        <div>
+          <button id="btn-refresh" aria-label="Muat ulang data portofolio">Refresh</button>
+        </div>
+      </section>
+
+      <div class="data-tabel-wrapper glass-panel">
+        <div class="table-scroll">
+          <table id="tabel-portfolio">
+            <thead></thead>
+            <tbody></tbody>
+          </table>
+        </div>
+      </div>
     </div>
-  </section>
 
-  <div class="data-tabel-portofolio">
-    <table id="tabel-portfolio">
-      <thead></thead>
-      <tbody></tbody>
-    </table>
+    <div class="glass-container margin-rekapitulasi">
+      <section class="judul-bagian" aria-label="Bagian Rekapitulasi">
+        <h2>♥ Rekapitulasi</h2>
+      </section>
+
+      <div class="data-tabel-wrapper glass-panel">
+        <div class="table-scroll">
+          <table id="tabel-rekapitulasi">
+            <thead></thead>
+            <tbody></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
   </div>
 
-  <section class="judul-bagian margin-rekapitulasi" aria-label="Bagian Rekapitulasi">
-    <h2>♥ Rekapitulasi</h2>
-  </section>
-
-  <div class="data-tabel">
-    <table id="tabel-rekapitulasi">
-      <thead></thead>
-      <tbody></tbody>
-    </table>
-  </div>
 </body>
 </html>
-
