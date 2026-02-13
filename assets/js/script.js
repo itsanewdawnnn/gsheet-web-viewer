@@ -1,6 +1,6 @@
 (function() {
   const allowedOrigin = 'https://itsanewdawnnn.github.io';
-  const allowedPath = '/smart-money-tracker/';
+  const allowedPath = '/smart-money-tracking/';
   const currentOrigin = window.location.origin;
   const currentPath = window.location.pathname;
 
@@ -99,3 +99,4 @@ window.redirectToSheet = function() {
     '_blank'
   );
 };
+
