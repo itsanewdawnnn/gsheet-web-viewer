@@ -90,10 +90,3 @@ function loadData() {
 }
 
 window.onload = loadData;
-
-window.redirectToSheet = function() {
-  window.open(
-    'https://docs.google.com/spreadsheets/d/e/2PACX-1vRWphCAKFdMWQcSqCxndaeQoZXEa76a_Qz2Eg5rGQaNqlJ_r_UGLCDBiAdqAgbwzwkKkWvLn_QvNDc4/pubhtml',
-    '_blank'
-  );
-};
